@@ -1,50 +1,69 @@
+/// Wes Rupert       - ora@outlook.com
+/// Original Author  - Andrew Heckman
+/// Purgatory        - Ghost.cs
+/// Script to control the ghost's actions.
+
 using UnityEngine;
 using System.Collections;
-//Andrew Heckman
 
 public class Ghost : MonoBehaviour {
-	public Player player;
+    public Player player;
 
-    public bool canFlip = true;
-    
-	// Use this for initialization
+    /// <summary>
+	/// Use this for initialization.
+    /// </summary>
 	void Start () {
+        if (player == null) {
+            player = GameObject.Find("Player") as Player;
+        }
 	}
 	
-	// Update is called once per frame
+    /// <summary>
+	/// Update is called once per frame.
+    /// </summary>
 	void Update () {
-		var playerPos = player.transform.position;
-		var myPos = this.transform.position;
-		myPos.x = playerPos.x;
-		myPos.y = -playerPos.y;
-		this.transform.position = myPos;
+        // Move to the player's location.
+		Vector3 position = player.transform.position;
+        position.y = -position.y;
+		transform.position = position;
 	}
 
-	//removes player flip rights if inside object
-	//don't want player to kill themselves on flip
+    /// <summary>
+    /// Trigger for entering a collision. Stops the player from flipping.
+    /// </summary>
     void OnCollisionEnter() {
-        player.canFlip = false;
+        setNoFlip();
 	}
 
+    /// <summary>
+    /// Trigger for entering a collision. Stops the player from flipping.
+    /// </summary>
     void OnCollisionStay() {
-        player.canFlip = false;
+        setNoFlip();
     }
 	
-	//resumes flippableness after leaving object
+    /// <summary>
+    /// Trigger for entering a collision. Reenables the player to flip.
+    /// </summary>
     void OnCollisionExit() {
-        player.canFlip = true;
+        setYesFlip();
 	}
 	
-	
-	//switches ghost with player
-	void Switch(){
+    /// <summary>
+    /// Enables flipping.
+    /// </summary>
+    void setYesFlip() {
+        player.canFlip = false;
+
+        // TODO: Make ghost red when in collision.
+    }
+
+    /// <summary>
+    /// Disables flipping.
+    /// </summary>
+    void setNoFlip() {
         player.canFlip = true;
-		Vector3 position = player.transform.position;
-		player.transform.position = this.transform.position;
-		this.transform.position = position;
-        player.rigidbody.velocity = new Vector3(
-                player.rigidbody.velocity.x,
-                -player.rigidbody.velocity.y,
-                player.rigidbody.velocity.z);
-	}
+
+        // TODO: Make ghost white when out of collision.
+    }
 }

@@ -192,6 +192,9 @@ public class GameManager : MonoBehaviour {
         get {
             // Aaaand this is why I'm abstracting it.
             return Physics.gravity.y > 0;
+
+            // NOTE: Slower but more correct way to do this:
+            // return ((CameraTracking)GameObject.Find("Camera")).side == CameraTracking.Side.Flip;
         }
     }
 
@@ -259,6 +262,7 @@ public class GameManager : MonoBehaviour {
                 }
                 break;
             default :
+                // We don't do anything when we don't know what's going on. Pray the game isn't broken.
                 break;
         }
     }
@@ -364,6 +368,7 @@ public class GameManager : MonoBehaviour {
         if (Time.timeScale > 0f) {
             timeScale = Time.timeScale;
         }
+
         Time.timeScale = 0f;
     }
 
