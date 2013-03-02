@@ -13,9 +13,6 @@ public class Ghost : MonoBehaviour {
 	/// Use this for initialization.
     /// </summary>
 	void Start () {
-        if (player == null) {
-            player = GameObject.Find("Player") as Player;
-        }
 	}
 	
     /// <summary>

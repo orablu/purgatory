@@ -14,8 +14,9 @@ public class Player : MonoBehaviour {
 
     // Player physics.
 	public float moveSpeed  = 5f;
-	public float jumpHeight = 300;
+	public float jumpHeight = 3;
 	public bool  canFlip    = true;
+    public bool  isGrounded = true;
 
     // Player controls.
     public KeyCode leftKey  = KeyCode.LeftArrow;
@@ -29,10 +30,6 @@ public class Player : MonoBehaviour {
     /// Use this for initialization.
     /// </summary>
 	void Start() {
-        // We need a manager!
-        if (manager == null) {
-            manager = GameObject.Find("_Game Manager") as GameManager;
-        }
 	}
 	
     /// <summary>
@@ -42,11 +39,11 @@ public class Player : MonoBehaviour {
 		if(manager.state == GameManager.GameState.LevelPlaying) {
 			if(Input.GetKey(leftKey)) {
                 // Move left.
-				transform.Translate(Vector3.left * Time.deltaTime * speed);
+				transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
 			}
 			if(Input.GetKey(rightKey)) {
                 // Move right.
-				transform.Translate(Vector3.left * Time.deltaTime * -speed);
+				transform.Translate(Vector3.left * Time.deltaTime * -moveSpeed);
 			}
 			if(Input.GetKeyDown(jumpKey) & isGrounded) {
                 // Jump.
@@ -123,8 +120,8 @@ public class Player : MonoBehaviour {
         // Tell the game manager that we've died.
         GameObject.Find("_Game Manager").SendMessage("Died");
 
-        // Remove the player.
-        GameObject.Destroy(this);
+        // Remove the player. TODO: Implement player as GameManager prefab object.
+        // GameObject.Destroy(this);
 	}
 	
     /// <summary>

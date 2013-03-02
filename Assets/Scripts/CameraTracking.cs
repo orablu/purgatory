@@ -13,8 +13,20 @@ public class CameraTracking : MonoBehaviour {
     /// The object that the camera is tracking.
     /// </summary>
     public GameObject trackedObject;
+
+    /// <summary>
+    /// True if the camera should follow behind the tracked object, otherwise snaps to it.
+    /// </summary>
     public bool trackingDelay = true;
+
+    /// <summary>
+    /// How fast to fall bahind the player.
+    /// </summary>
     public float trackingSpeed = 0.05f;
+
+    /// <summary>
+    /// How far max the camera can fall behind.
+    /// </summary>
     public float maxTrackingDelay = 5f;
 
     /// <summary>
