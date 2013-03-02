@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour {
 
     // Default values for the global variables.
     private const string D_LEVEL     = "New level";
+    private const float  D_GRAVITY   = 9.8f;
     private const float  D_SCORE     = 0f;
+    private const float  D_TIMESPEED = 2f;
     private const int    D_LIVES     = 3;
     private const int    D_SWIDTH    = 200;
-    private const float  D_TIMESPEED = 2f;
 
     // Constant strings for the gui.
     private const string S_COUNTDOWN = "Start in {0}";
