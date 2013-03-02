@@ -95,14 +95,15 @@ public class CameraTracking : MonoBehaviour {
     /// Updates the variables used to track movement and st=naps the camera to its destination.
     /// </summary>
     void stopFlipping() {
+        // Update status.
         side = (side == Side.Norm) ? Side.Flip : Side.Norm;
         flipping = false;
-
-        // Tell the ghost to change, since we stopped flipping.
-        GameObject.Find("Ghost").SendMessage("Switch");
         
         // Reverse the gravity.
         Physics.gravity = Physics.gravity * -1f;
+
+        // Tell the player to change, since we stopped flipping.
+        GameObject.Find("Player").SendMessage("StopFlipping");
     }
 
     /// <summary>
