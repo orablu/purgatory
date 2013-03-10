@@ -115,7 +115,7 @@ public class CameraTracking : MonoBehaviour {
         Physics.gravity = Physics.gravity * -1f;
 
         // Tell the player to change, since we stopped flipping.
-        GameObject.Find("Player").SendMessage("StopFlipping");
+        GameObject.Find("Player").SendMessage("stopFlipping");
     }
 
     /// <summary>

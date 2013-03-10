@@ -50,7 +50,7 @@ public class Ghost : MonoBehaviour {
     /// Enables flipping.
     /// </summary>
     void setYesFlip() {
-        player.canFlip = false;
+        player.canFlip = true;
 
         // TODO: Make ghost red when in collision.
     }
@@ -59,7 +59,7 @@ public class Ghost : MonoBehaviour {
     /// Disables flipping.
     /// </summary>
     void setNoFlip() {
-        player.canFlip = true;
+        player.canFlip = false;
 
         // TODO: Make ghost white when out of collision.
     }

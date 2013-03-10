@@ -14,9 +14,10 @@ public class Player : MonoBehaviour {
 
     // Player physics.
 	public float moveSpeed  = 5f;
-	public float jumpHeight = 3;
+	public float jumpForce = 300;
 	public bool  canFlip    = true;
     public bool  isGrounded = true;
+    public bool  isFlipping = false;
 
     // Player controls.
     public KeyCode leftKey  = KeyCode.LeftArrow;
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour {
     /// Update is called once per frame.
     /// </summary>
 	void FixedUpdate() {
-		if(manager.state == GameManager.GameState.LevelPlaying) {
+		if(manager.state == GameManager.GameState.LevelPlaying && !isFlipping) {
 			if(Input.GetKey(leftKey)) {
                 // Move left.
 				transform.Translate(Vector3.left * Time.deltaTime * moveSpeed);
@@ -52,8 +53,7 @@ public class Player : MonoBehaviour {
 			}
 			if(Input.GetKeyDown(flipKey) & canFlip) {
                 // Flip.
-                canFlip = false;
-				Flip();
+				flip();
 			}
 		}
 	}
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// Trigger for entering a collision. Grounds the player.
     /// </summary>
-	void OnCollisionEnter(){
+	void OnCollisionEnter(Collision collision){
 		if(collision.gameObject.tag == "Platform"){
 			isGrounded = true;
 		}
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// Trigger for exiting a collision. Ungrounds the player.
     /// </summary>
-	void OnCollisionExit(){
+	void OnCollisionExit(Collision collision){
 		if(collision.gameObject.tag == "Platform"){
 			isGrounded = false;
 		}
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour {
     /// <summary>
     /// Flip the world. Freeze the player while flipping.
     /// </summary>
-	void Flip() {
+	void flip() {
         // Tell the world to flip.
 		GameObject.Find("Camera").SendMessage("startFlipping");
 
@@ -91,15 +91,19 @@ public class Player : MonoBehaviour {
 
         // Freeze the player.
         rigidbody.useGravity = false;
-        velocity = transform.velocity;
-        transform.velocity = Vector3.zero;
+        velocity = rigidbody.velocity;
+        rigidbody.velocity = Vector3.zero;
         velocity.y = -velocity.y;
+
+        // Player can't flip now.
+        canFlip = false;
+        isFlipping = true;
 	}
 
     /// <summary>
     /// Stop flipping. Unfreeze the player.
     /// </summary>
-    void StopFlipping() {
+    public void stopFlipping() {
         // Flip the player.
         Vector3 position = transform.position;
 		transform.position = ghost.transform.position;
@@ -107,10 +111,11 @@ public class Player : MonoBehaviour {
 
         // Unfreeze the player.
         rigidbody.useGravity = true;
-        transform.velocity = velocity;
+        rigidbody.velocity = velocity;
 
         // Player can flip again.
         canFlip = true;
+        isFlipping = false;
     }
 	
     /// <summary>
