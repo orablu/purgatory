@@ -1,6 +1,6 @@
-/// Wes Rupert - wkr3
-/// EECS 290   - Project 02
-/// Purgatory  - GoalZone.cs
+/// Wes Rupert       - ora@outlook.com
+/// Original Author  - Wes Rupert
+/// Purgatory        - CameraTracking.cs
 /// Script to control the goal detection and respose.
 
 using UnityEngine;

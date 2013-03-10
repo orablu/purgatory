@@ -1,3 +1,8 @@
+/// Wes Rupert       - ora@outlook.com
+/// Original Author  - Wes Rupert
+/// Purgatory        - CameraTracking.cs
+/// Script for controlling elevator platforms.
+
 using UnityEngine;
 using System.Collections;
 

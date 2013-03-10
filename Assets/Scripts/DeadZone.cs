@@ -1,6 +1,6 @@
-/// Wes Rupert - wkr3
-/// EECS 290   - Project 02
-/// Purgatory  - DeadZone.cs
+/// Wes Rupert       - ora@outlook.com
+/// Original Author  - Wes Rupert
+/// Purgatory        - CameraTracking.cs
 /// Script to control the actions of the dead zones.
 
 using UnityEngine;
@@ -15,7 +15,7 @@ public class DeadZone : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // TODO: Add animation.
+        // TODO: Add animation?
 	}
 
     void OnCollisionEnter(Collision collision) {

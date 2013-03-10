@@ -1,6 +1,6 @@
-/// Wes Rupert - wkr3
-/// EECS 290   - Project 02
-/// Purgatory  - CameraTracking.cs
+/// Wes Rupert       - ora@outlook.com
+/// Original Author  - Wes Rupert
+/// Purgatory        - CameraTracking.cs
 /// Script to control the camera tracking and flip mechanic.
 
 using UnityEngine;
